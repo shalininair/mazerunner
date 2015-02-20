@@ -2,6 +2,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require "maze/version"
 require "maze/hello"
+require "maze/mazerunner"
 
 module Maze
   # Your code goes here...
