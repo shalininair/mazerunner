@@ -5,5 +5,4 @@ require "maze/mazerunner"
 
 module Maze
   # Your code goes here...
-   puts "hello from the maze!"
 end
