@@ -1,0 +1,183 @@
+class Scene
+ def enter
+  
+ end
+  
+end
+
+
+
+class Engine
+ def initialize(scene_map)
+  @scene_map = scene_map
+ end
+ 
+ def play
+  current_scene = @scene_map.opening_scene
+  last_scene = @scene_map.next_scene('finished')
+
+  while current_scene != last_scene
+   next_scene_name = current_scene.enter
+   current_scene = @scene_map.next_scene(next_scene_name)
+  end
+
+  current_scene.enter
+ end
+ 
+end
+
+class Death < Scene
+
+ @@quips = ['You suck at this. You are dead!!!',
+            'Whoa, wrong thing to do! You are dead!!!',
+            'Boom!! You are dead!!!']
+ def enter
+    puts @@quips[rand(0..@@quips.length - 1)]
+    exit(1)
+ end
+ 
+ 
+end
+
+class CentralCorridor < Scene
+
+ def enter
+ puts "Klngons have captured your ship killing all crew members but you."
+ puts "You one chance of escape is to reach the Armory, grab the neutron bomb, blow up the bridge and get on an escape pod back to Earth."   
+ puts "You are in the Central Corridor and there's a Kilngon blocking your way and he's reaching for his blaster." 
+ puts "What will you do next?" 
+ action = $stdin.gets.chomp
+
+ case action
+  when 'Shoot'
+    puts "You reach for your needler, he reaches for the blaster!!"
+    puts "He gets its out first and shoots you in the face!!!"
+    return ('death')
+  when 'Run Away'  
+   puts "You turn and start running as fast as you can!!!"
+   puts "But his aim is too good for you!!!"
+   return('death')
+  when 'Dodge'
+  puts "He shoots at you, you dodge!!" 
+  puts "Alas! His aim is too good or you are too slow"
+  return('death')
+  when 'Tell a joke'
+     puts "You crack a really bad joke."
+     puts "The Klingon cracks up laughing, you quickly reach for your needler and blow him into bits"
+     return('finished')
+  else
+    puts 'Does not compute!!!+++!!!'   
+    return('central_corridor')
+ end
+
+ end
+ 
+ 
+end
+
+class Bridge < Scene
+ def enter
+  puts "You reach the bridge and see it's crowded by Klingons. You see them, they see you!!"
+  action = $stdin.gets.chomp
+  case object
+   when "Throw the bomb!!"
+    puts "You throw the bomb at the bridge."
+    puts "Unfortunately it has a hair trigger and blows up the ship with you in it"
+    return('death')
+   when 'Place the bomb gently' 
+    puts "You take advantage of their shock and point your needler at the bomb!!"
+    puts "They all look afraid and raise their hands."
+    puts "You gently place the bomb on the floor, and slowly back out while keeping your needler at it."
+    puts "Just before the door closes, you shoot it and run to escape the blast"
+    return ('escape_pod')
+   else
+    puts 'Does not compute!!!+++!!!'   
+    return('the_bridge') 
+  end
+ end
+ 
+ 
+end
+
+class Armory < Scene
+ def enter
+  puts "You sneak as quietly as you can into the armory and see the neutron bomb sitiing in its container."
+  puts "There's a keylock on the box and you must crack it to access the bomb."
+  puts " You have 10 tries before it seals shut forever!!"
+  keycode = "#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}"
+  puts "<<Keypad>>"
+  action = $stdin.gets.chomp
+  guesses = 1
+  while guesses < 10 and action != keycode
+   puts "BZZZZD!"
+   guesses += 1
+   puts "<<Keypad>>"
+   action = $stdin.gets.chomp
+  end
+  if action == keycode
+   puts "You cracked the code!!! Now take the bomb and race to the bridge."
+   return('the_bridge')
+  else
+   puts "Damn! You were so close but so wrong"
+   return('death')
+  end
+ end
+ 
+ 
+end
+
+class EscapePod < Scene
+ def enter
+  puts "You arrive breathless at the escape pod...There are 5 pods, but only 1 of them is still functioning."
+  puts "Hurry!!! You need to grab the correct one, which is it??"
+  good_pod = rand(1..5)
+  action = $stdin.gets.chomp
+  if action == good_pod
+   puts "You did it!!! You are finally on your way to your home planet!!!!"
+   return('finished')
+  else
+   puts "Oh no!!!!! This is the wrong pod!!"
+   puts "The ship explodes around you, with you still in it..."
+   puts('death')
+  end
+ end
+ 
+ 
+end
+
+class Finished < Scene
+ def enter
+   "You did it. You won this round."
+ end
+ 
+ 
+end
+
+class Map 
+
+  @@scenes = {
+   'central_corridor' => CentralCorridor.new,
+   'the_bridge' => Bridge.new,
+   'armory' => Armory.new,
+   'escape_pod' => EscapePod.new,
+   'death' => Death.new,
+   'finished' => Finished.new
+  }
+
+ def initialize(start_scene)
+  @start_scene = start_scene
+ end
+
+ def opening_scene
+  next_scene(@start_scene)
+ end
+ 
+ def next_scene(scene_name)
+  @@scenes[scene_name]
+ end
+ 
+end
+
+a_map = Map.new('central_corridor')
+a_game = Engine.new(a_map)
+a_game.play
