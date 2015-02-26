@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 class Scene
  def enter
   
@@ -28,11 +29,11 @@ end
 
 class Death < Scene
 
- @@quips = ['You suck at this. You are dead!!!',
-            'Whoa, wrong thing to do! You are dead!!!',
-            'Boom!! You are dead!!!']
+ @@quips = ['You suck at this.',
+            'Whoa, wrong thing to do!',
+            'Boom!!']
  def enter
-    puts @@quips[rand(0..@@quips.length - 1)]
+    puts "#{@@quips[rand(0..@@quips.length - 1)]}. You are dead!!!'"
     exit(1)
  end
  
@@ -64,7 +65,7 @@ class CentralCorridor < Scene
   when 'Tell a joke'
      puts "You crack a really bad joke."
      puts "The Klingon cracks up laughing, you quickly reach for your needler and blow him into bits"
-     return('finished')
+     return('armory')
   else
     puts 'Does not compute!!!+++!!!'   
     return('central_corridor')
@@ -78,8 +79,10 @@ end
 class Bridge < Scene
  def enter
   puts "You reach the bridge and see it's crowded by Klingons. You see them, they see you!!"
+  puts "They see you have the bomb in one hand your eedler in the other and freeze!"
+  puts " What you next action?"
   action = $stdin.gets.chomp
-  case object
+  case action
    when "Throw the bomb!!"
     puts "You throw the bomb at the bridge."
     puts "Unfortunately it has a hair trigger and blows up the ship with you in it"
@@ -105,8 +108,9 @@ class Armory < Scene
   puts "There's a keylock on the box and you must crack it to access the bomb."
   puts " You have 10 tries before it seals shut forever!!"
   keycode = "#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}"
+  #puts keycode
   puts "<<Keypad>>"
-  action = $stdin.gets.chomp
+  action = $stdin.gets.chomp 
   guesses = 1
   while guesses < 10 and action != keycode
    puts "BZZZZD!"
@@ -131,14 +135,15 @@ class EscapePod < Scene
   puts "You arrive breathless at the escape pod...There are 5 pods, but only 1 of them is still functioning."
   puts "Hurry!!! You need to grab the correct one, which is it??"
   good_pod = rand(1..5)
-  action = $stdin.gets.chomp
+#  puts good_pod
+  action = $stdin.gets.chomp.to_i
   if action == good_pod
    puts "You did it!!! You are finally on your way to your home planet!!!!"
    return('finished')
   else
    puts "Oh no!!!!! This is the wrong pod!!"
    puts "The ship explodes around you, with you still in it..."
-   puts('death')
+   return('death')
   end
  end
  
@@ -155,7 +160,11 @@ end
 
 class Map 
 
-  @@scenes = {
+
+
+ def initialize(start_scene)
+  @start_scene = start_scene
+    @scenes = {
    'central_corridor' => CentralCorridor.new,
    'the_bridge' => Bridge.new,
    'armory' => Armory.new,
@@ -163,9 +172,6 @@ class Map
    'death' => Death.new,
    'finished' => Finished.new
   }
-
- def initialize(start_scene)
-  @start_scene = start_scene
  end
 
  def opening_scene
@@ -173,7 +179,7 @@ class Map
  end
  
  def next_scene(scene_name)
-  @@scenes[scene_name]
+  @scenes[scene_name]
  end
  
 end
