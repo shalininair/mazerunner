@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require "maze/version"
-require "maze/mazerunner"
+require "mazerunner/version"
+require "mazerunner/game"
 
-module Maze
+module Mazerunner
   # Your code goes here...
 end

@@ -49,16 +49,11 @@ Scenarios: wrong action
 | Tell a joke | Run Away | You are dead!!! |
 
 
-Scenario Outline: submit confusing action
-Given the correct action is "<action>"
-When I dont guess "<guess>"
-Then I should see "<response>"
-
 Scenarios: Confusing action
 | action | guess | response |
-| Tell a joke | Tell a joke | Does not compute!!!+++!!! |
-| Tell a joke | Shoot | Does not compute!!!+++!!! |
-| Tell a joke | Dodge | Does not compute!!!+++!!! |
-| Tell a joke | Run Away | Does not compute!!!+++!!! |
+| Tell a joke | Tella joke | Does not compute!!!+++!!! |
+| Tell a joke | shoot! | Does not compute!!!+++!!! |
+| Tell a joke | dodge | Does not compute!!!+++!!! |
+| Tell a joke | Run away | Does not compute!!!+++!!! |
 
 

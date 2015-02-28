@@ -1,11 +1,11 @@
 coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'maze/version'
+require 'mazerunner/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "maze"
-  spec.version       = Maze::VERSION
+  spec.name          = "mazerunner"
+  spec.version       = Mazerunner::VERSION
   spec.authors       = ["Shalini Nair"]
   spec.email         = ["shalininair75@gmail.com"]
   spec.description   = %q{TODO: Write a gem description}
