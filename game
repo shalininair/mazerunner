@@ -44,8 +44,8 @@ class CentralCorridor < Scene
 
  def enter
  puts "Klngons have captured your ship killing all crew members but you."
- puts "You one chance of escape is to reach the Armory, grab the neutron bomb, blow up the bridge and get on an escape pod back to Earth."   
- puts "You are in the Central Corridor and there's a Kilngon blocking your way and he's reaching for his blaster." 
+ puts "Your one chance of escape is to reach the Armory, grab the neutron bomb, blow up the bridge and get on an escape pod back to Earth."   
+ puts "You are in the Central Corridor and there's a Klingon blocking your way and he's reaching for his blaster." 
  puts "What will you do now?" 
  action = $stdin.gets.chomp
 
