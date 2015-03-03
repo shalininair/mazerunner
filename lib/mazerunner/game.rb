@@ -11,5 +11,6 @@ module Mazerunner
     @output.puts "You are in the Central Corridor and there's a Klingon blocking your way and he's reaching for his blaster." 
     @output.puts 'What will you do now?'
    end
+   
  end
 end
