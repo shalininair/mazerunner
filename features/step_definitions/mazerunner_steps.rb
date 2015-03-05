@@ -23,7 +23,6 @@ Given(/^the correct action is "(.*?)"$/) do |action|
   @game.start(action)
 end
 
-
 When(/^I start a new game$/) do
   game = Mazerunner::Game.new(terminal_output)
   game.start('')
