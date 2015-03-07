@@ -12,7 +12,6 @@ end
   @output ||= Output.new
  end
  
-
 Given(/^I am not yet playing$/) do
 end
 
@@ -37,4 +36,3 @@ end
 Then(/^I should see "(.*?)"$/) do |message|
   expect(terminal_output.messages).to include(message)
 end
-
