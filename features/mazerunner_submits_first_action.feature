@@ -55,5 +55,3 @@ Scenarios: Confusing guess
 | Tell a joke | shoot! | Does not compute!!!+++!!! |
 | Tell a joke | dodge! | Does not compute!!!+++!!! |
 | Tell a joke | Run away! | Does not compute!!!+++!!! |
-
-
