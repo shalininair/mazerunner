@@ -1,4 +1,5 @@
 class Output 
+
  def messages
    @messages ||= []
  end
@@ -6,11 +7,14 @@ class Output
  def puts(message)
   messages << message
  end
+
 end
 
- def terminal_output
-  @output ||= Output.new
- end
+
+
+def terminal_output
+ @output ||= Output.new
+end
  
 Given(/^I am not yet playing$/) do
 end

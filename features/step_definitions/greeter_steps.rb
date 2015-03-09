@@ -1,9 +1,7 @@
 # class CucumberGreeter
 #  def greet
 #   "Hello Cucumber!"
-#  end
- 
- 
+#  end 
 # end
 
 # Given(/^a greeter$/) do
