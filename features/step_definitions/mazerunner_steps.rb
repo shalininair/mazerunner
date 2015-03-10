@@ -1,5 +1,4 @@
 class Output 
-
  def messages
    @messages ||= []
  end
@@ -7,7 +6,6 @@ class Output
  def puts(message)
   messages << message
  end
-
 end
 
 
