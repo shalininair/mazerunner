@@ -9,7 +9,6 @@ class Output
 end
 
 
-
 def terminal_output
  @output ||= Output.new
 end
